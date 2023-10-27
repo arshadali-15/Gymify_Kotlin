@@ -7,8 +7,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.RadioButton
+import android.widget.Toast
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.firestore
 import java.util.Calendar
 import java.util.Date
 
@@ -17,14 +23,26 @@ class Form : AppCompatActivity() {
     val dateFormat = SimpleDateFormat("dd/MM/yyyy")
     val calendar = Calendar.getInstance()
 
-    lateinit var name: EditText
-    lateinit var phone: EditText
-    lateinit var address: EditText
+    lateinit var nameET: EditText
+    lateinit var phoneET: EditText
+    lateinit var ageET :EditText
+    lateinit var addressET: EditText
     lateinit var startDateET: EditText
     lateinit var endDateET: EditText
     lateinit var durationET: EditText
     lateinit var selectedGender: String
+    lateinit var progressBar : ProgressBar
 
+
+
+    lateinit var startDate :String
+    lateinit var endDate :String
+    var duration:Int=0
+    lateinit var gymifyBtn :Button
+
+
+
+    private var db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +50,14 @@ class Form : AppCompatActivity() {
 
 
         // OTHER VARIABLES-------------------------------------------------------------------------
+        nameET=findViewById<EditText>(R.id.edit_name)
+        phoneET=findViewById<EditText>(R.id.edit_phone)
+        ageET=findViewById<EditText>(R.id.edit_age)
+        addressET=findViewById<EditText>(R.id.edit_address)
 
-        name.findViewById<EditText>(R.id.edit_name).text.toString()
-        phone.findViewById<EditText>(R.id.edit_phone).text.toString()
-        address.findViewById<EditText>(R.id.edit_address).text.toString()
+        progressBar = findViewById<ProgressBar>(R.id.progress_circular)
+
+        gymifyBtn=findViewById<Button>(R.id.gymify_btn)
 
         //-------------------------------------------------------------------------------------------
 
@@ -45,6 +67,10 @@ class Form : AppCompatActivity() {
         startDateET = findViewById<EditText>(R.id.edit_startDate)
         endDateET = findViewById<EditText>(R.id.edit_endDate)
         durationET = findViewById<EditText>(R.id.edit_duration)
+
+        startDate = startDateET.text.toString()
+         endDate = endDateET.text.toString()
+
 
         durationET.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -61,14 +87,14 @@ class Form : AppCompatActivity() {
             }
         })
 
-        val duration = durationET.text.toString().toInt()
+        duration = durationET.text.toString().toInt()
 
         val currentDate = getCurrentDate()
         startDateET.setText(currentDate)
 
         calendar.add(Calendar.MONTH, duration)
 
-        val endDate = dateFormat.format(calendar.time)
+        endDate = dateFormat.format(calendar.time)
 
         endDateET.setText(endDate)
 
@@ -79,7 +105,15 @@ class Form : AppCompatActivity() {
             showDatePickerDialog()
         }
 //--------------------------------------------------------------------------------------------
+        // Submit BUTTON CLICK-------------------------------------------------------------------------------
 
+        gymifyBtn.setOnClickListener {
+            progressBar.visibility =View.VISIBLE
+            gymify()
+        }
+
+
+        //--------------------------------------------------------------------------------------------
 
     }
 
@@ -141,5 +175,46 @@ class Form : AppCompatActivity() {
     }
 //-------------------------------------------------------------------------------------------
 
+ //  ADDING DATA INTO THE FIRESTORE -------------------------------------------------------------------------------------------
 
+
+    // Gymify BUTTON CLICK-------------------------------------------------------------------------------
+    private fun gymify() {
+
+        val  name = nameET.text.toString()
+        val phone = phoneET.text.toString()
+         val age= ageET.text.toString()
+         val address= addressET.text.toString()
+        val startDate = startDateET.text.toString()
+        val duration = durationET.text.toString()
+
+        val memberMap = hashMapOf(
+            "name" to name,
+            "gender" to selectedGender,
+            "phone" to phone,
+            "age" to age,
+            "address" to address,
+            "startDate" to startDate,
+            "endDate" to endDate,
+            "duration" to duration
+        )
+
+        val userId  = FirebaseAuth.getInstance().currentUser!!.uid
+
+        db.collection("users").document().set(memberMap)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Member Added Successfully", Toast.LENGTH_SHORT).show()
+                nameET.text.clear()
+                addressET.text.clear()
+                ageET.text.clear()
+                phoneET.text.clear()
+                progressBar.visibility = View.INVISIBLE
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "FAILURE!! Member Not Added", Toast.LENGTH_SHORT).show()
+
+            }
+    }
+
+    // -------------------------------------------------------------------------------
 }

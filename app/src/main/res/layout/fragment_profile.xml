@@ -57,6 +57,7 @@
         android:id="@+id/name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/aclonica"
         android:text="Arshadali"
         android:layout_margin="28dp"
         android:textSize="26sp"

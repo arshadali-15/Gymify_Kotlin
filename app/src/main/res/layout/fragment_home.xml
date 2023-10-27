@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gym Members"
+        android:fontFamily="@font/aclonica"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,10 +42,13 @@
         android:src="@drawable/ic_subs"
         app:rippleColor="@color/black"
         app:tint="@android:color/black"
+        app:fabCustomSize="50dp"
         app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
         android:backgroundTint="@color/white"
         android:contentDescription="Add Members" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

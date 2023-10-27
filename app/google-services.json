@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "504971732543",
+    "project_id": "primefitness-c6e4f",
+    "storage_bucket": "primefitness-c6e4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504971732543:android:aeaddff311433a47917a8a",
+        "android_client_info": {
+          "package_name": "com.example.primefitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504971732543-2o04d8edc0l631ndqrad1m13nvu5back.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.primefitness",
+            "certificate_hash": "48a15a1f6ac959e045a3054bf3f6c8e0fb221731"
+          }
+        },
+        {
+          "client_id": "504971732543-9m2qp6p7hfnstqkhpn78tab0rtep14af.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfjD2OMU-uFJmAR0NHQHQPdgfFQxBk0wE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504971732543-9m2qp6p7hfnstqkhpn78tab0rtep14af.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
