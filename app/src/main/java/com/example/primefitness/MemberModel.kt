@@ -12,8 +12,9 @@ data class MemberModel(
     val duration :String,
     val gender :String,
     val phone :String,
+    val endDate :String
 
    )
 {
-   constructor(): this("", "","","","","",)
+    constructor(): this("", "","","","","","")
 }

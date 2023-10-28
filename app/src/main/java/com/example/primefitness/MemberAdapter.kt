@@ -9,12 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.primefitness.R
 
-class MemberAdapter(private val listMembers : List<MemberModel>) :
+class MemberAdapter(private val listMembers: List<MemberModel>) :
     RecyclerView.Adapter<MemberAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val item = inflater.inflate(R.layout.item_member, parent,false)
+        val item = inflater.inflate(R.layout.item_member, parent, false)
         return ViewHolder(item)
     }
 
@@ -22,17 +22,25 @@ class MemberAdapter(private val listMembers : List<MemberModel>) :
         val item = listMembers[position]
         holder.name.text = item.name
 //        holder.img.setImageResource(item.img)
-     //   holder.duration.text = item.duration
+        holder.endDate.text = item.endDate
+        holder.gender.text = item.gender
+        holder.address.text = item.address
+        holder.duration.text = item.duration
+
 
     }
 
     override fun getItemCount(): Int {
-        return  listMembers.size
+        return listMembers.size
     }
 
-    class ViewHolder(val item : View): RecyclerView.ViewHolder(item) {
+    class ViewHolder(val item: View) : RecyclerView.ViewHolder(item) {
 
-        val name= item.findViewById<TextView>(R.id.name)
+        val address = item.findViewById<TextView>(R.id.address)
+        val gender = item.findViewById<TextView>(R.id.gender)
+        val name = item.findViewById<TextView>(R.id.name)
+        val endDate = item.findViewById<TextView>(R.id.end_date)
+        val duration = item.findViewById<TextView>(R.id.duration)
 //        val img = item.findViewById<ImageView>(R.id.profile_pic)
 //        val duration = item.findViewById<EditText>(R.id.edit_duration)
 

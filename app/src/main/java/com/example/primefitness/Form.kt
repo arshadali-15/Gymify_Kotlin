@@ -1,11 +1,13 @@
 package com.example.primefitness
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -69,7 +71,7 @@ class Form : AppCompatActivity() {
         durationET = findViewById<EditText>(R.id.edit_duration)
 
         startDate = startDateET.text.toString()
-         endDate = endDateET.text.toString()
+
 
 
         durationET.addTextChangedListener(object : TextWatcher {
@@ -95,6 +97,8 @@ class Form : AppCompatActivity() {
         calendar.add(Calendar.MONTH, duration)
 
         endDate = dateFormat.format(calendar.time)
+
+
 
         endDateET.setText(endDate)
 
@@ -186,6 +190,7 @@ class Form : AppCompatActivity() {
          val age= ageET.text.toString()
          val address= addressET.text.toString()
         val startDate = startDateET.text.toString()
+        val endDate = endDateET.text.toString()
         val duration = durationET.text.toString()
 
         val memberMap = hashMapOf(

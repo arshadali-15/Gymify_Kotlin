@@ -2,4 +2,5 @@
     <string name="app_name">Prime Fitness</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="webClientId">504971732543-9m2qp6p7hfnstqkhpn78tab0rtep14af.apps.googleusercontent.com</string>
 </resources>
